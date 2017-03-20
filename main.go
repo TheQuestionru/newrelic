@@ -11,15 +11,19 @@ package newrelic
 import (
 	"net/http"
 	"net/url"
+	"time"
 )
 
 // DefaultAPIURL is the default base URL for New Relic's latest API.
-const DefaultAPIURL = "https://api.newrelic.com/v2/"
+const (
+	DefaultAPIURL = "https://api.newrelic.com/v2/"
+	DefaultTimeout = 5 * time.Second
+)
 
 // Client provides a set of methods to interact with the New Relic API.
 type Client struct {
 	apiKey     string
-	httpClient *http.Client
+	HttpClient *http.Client
 	url        *url.URL
 }
 
@@ -31,7 +35,7 @@ func NewClient(apiKey string) *Client {
 	}
 	return &Client{
 		apiKey:     apiKey,
-		httpClient: &http.Client{},
+		HttpClient: &http.Client{Timeout: DefaultTimeout},
 		url:        u,
 	}
 }
