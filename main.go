@@ -23,7 +23,7 @@ const (
 // Client provides a set of methods to interact with the New Relic API.
 type Client struct {
 	apiKey     string
-	HttpClient *http.Client
+	httpClient *http.Client
 	url        *url.URL
 }
 
@@ -35,7 +35,7 @@ func NewClient(apiKey string) *Client {
 	}
 	return &Client{
 		apiKey:     apiKey,
-		HttpClient: &http.Client{Timeout: DefaultTimeout},
+		httpClient: &http.Client{Timeout: DefaultTimeout},
 		url:        u,
 	}
 }
